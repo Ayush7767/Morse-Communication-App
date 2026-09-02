@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MorseAssist - Accessible Morse Code Communicator</title>
+    <!-- Google Fonts: Inter and Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Screen Reader Live Announcements -->
+    <div id="sr-announcer" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+
+    <div class="app-container">
+        <!-- Accessibility Header -->
+        <header class="app-header">
+            <h1>Morse<span class="highlight">Assist</span></h1>
+            <p class="subtitle">Assistive Speech & Communication Tool</p>
+        </header>
+
+        <!-- Main Workspace: Visual Grid -->
+        <main class="grid-layout">
+            <!-- Left Panel: State Displays -->
+            <section class="display-panel glass-card">
+                <h2 class="sr-only">Communicator Status</h2>
+                
+                <!-- Active Signal Buffer -->
+                <div class="display-box signal-box" aria-labelledby="signal-label">
+                    <span id="signal-label" class="box-label">Active Input Signal</span>
+                    <div id="current-pattern" class="box-content signal-text" aria-live="polite">Ready...</div>
+                </div>
+
+                <!-- Decoded Phrase Output -->
+                <div class="display-box message-box" aria-labelledby="message-label">
+                    <span id="message-label" class="box-label">Decoded Message</span>
+                    <div id="decoded-message" class="box-content message-text" aria-live="polite"></div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Communicator Buttons -->
+            <section class="controls-panel glass-card">
+                <h2>Communicator Controls</h2>
+                <div class="controls-grid">
+                    <button id="btn-dot" class="action-btn btn-primary" aria-label="Dot (Short Tone)">
+                        <span class="btn-text">DOT</span>
+                        <kbd class="shortcut-badge">.</kbd>
+                    </button>
+                    <button id="btn-dash" class="action-btn btn-primary" aria-label="Dash (Long Tone)">
+                        <span class="btn-text">DASH</span>
+                        <kbd class="shortcut-badge">-</kbd>
+                    </button>
+                    <button id="btn-space" class="action-btn btn-secondary" aria-label="Space (Commit Letter / Word Gap)">
+                        <span class="btn-text">SPACE</span>
+                        <kbd class="shortcut-badge">Spacebar</kbd>
+                    </button>
+                    <button id="btn-speak" class="action-btn btn-success" aria-label="Speak (Read Aloud)">
+                        <span class="btn-text">SPEAK</span>
+                        <kbd class="shortcut-badge">Enter</kbd>
+                    </button>
+                </div>
+                
+                <!-- Auxiliary buttons -->
+                <div class="auxiliary-actions">
+                    <button id="btn-backspace" class="aux-btn btn-warning" aria-label="Backspace (Undo last entry)">
+                        <span>Undo Last</span>
+                        <kbd class="shortcut-badge">Backspace</kbd>
+                    </button>
+                    <button id="btn-clear" class="aux-btn btn-danger" aria-label="Clear all text and signals">
+                        <span>Clear Message</span>
+                        <kbd class="shortcut-badge">Esc</kbd>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Tutorial Panel -->
+            <section class="tutorial-panel glass-card full-width">
+                <div class="tutorial-header">
+                    <h2>Alphabet Tutorial Mode</h2>
+                    <button id="btn-tutorial-toggle" class="action-btn tutorial-toggle-btn" aria-label="Start Tutorial">
+                        Start Tutorial
+                    </button>
+                </div>
+
+                <div id="tutorial-workspace" class="tutorial-body disabled" aria-disabled="true">
+                    <div class="tutorial-navigator">
+                        <button id="btn-tutorial-prev" class="nav-btn" aria-label="Previous Letter" disabled>
+                            &larr; Prev
+                        </button>
+                        
+                        <div class="tutorial-display">
+                            <div id="tutorial-letter" class="target-letter" aria-live="polite">-</div>
+                            <div id="tutorial-pattern-display" class="target-pattern" aria-live="polite">-</div>
+                        </div>
+
+                        <button id="btn-tutorial-next" class="nav-btn" aria-label="Next Letter" disabled>
+                            Next &rarr;
+                        </button>
+                    </div>
+
+                    <div class="tutorial-actions">
+                        <button id="btn-tutorial-play" class="action-btn play-btn" aria-label="Play Morse Code Tone" disabled>
+                            🔊 Play Morse Sound
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preferences Panel -->
+            <section class="preferences-panel glass-card full-width">
+                <h2>Preferences & Audio Controls</h2>
+                <div class="prefs-grid">
+                    <div class="pref-item">
+                        <label for="tts-engine-select">Speech Output Engine:</label>
+                        <select id="tts-engine-select">
+                            <option value="python" selected>Python Backend TTS (Recommended)</option>
+                            <option value="browser">Browser Web Speech API</option>
+                        </select>
+                    </div>
+                    
+                    <div class="pref-item">
+                        <label for="tone-volume">Beep Tone Volume:</label>
+                        <input type="range" id="tone-volume" min="0" max="1" step="0.1" value="0.5">
+                    </div>
+
+                    <div class="pref-item">
+                        <label for="tone-frequency">Morse Tone Pitch (Hz):</label>
+                        <input type="range" id="tone-frequency" min="300" max="1000" step="50" value="600">
+                        <span id="frequency-display">600 Hz</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Keyboard Shortcuts Instructions -->
+            <section class="shortcuts-guide glass-card full-width">
+                <h2>Keyboard Navigation Guide</h2>
+                <div class="guide-grid">
+                    <div>
+                        <h3>Communicator Keys</h3>
+                        <ul>
+                            <li><kbd>.</kbd> or <kbd>1</kbd> : Register Dot</li>
+                            <li><kbd>-</kbd> or <kbd>2</kbd> : Register Dash</li>
+                            <li><kbd>Space</kbd> or <kbd>3</kbd> : Spacing/Commit</li>
+                            <li><kbd>Enter</kbd> or <kbd>4</kbd> : Speak Text</li>
+                            <li><kbd>Backspace</kbd> : Undo Last Input</li>
+                            <li><kbd>Esc</kbd> : Clear Current Text</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Tutorial Mode Keys</h3>
+                        <ul>
+                            <li><kbd>T</kbd> / <kbd>t</kbd> : Toggle Tutorial Mode</li>
+                            <li><kbd>&larr;</kbd> / <kbd>[</kbd> : Previous Tutorial Letter</li>
+                            <li><kbd>&rarr;</kbd> / <kbd>]</kbd> : Next Tutorial Letter</li>
+                            <li><kbd>P</kbd> / <kbd>p</kbd> : Play Tutorial Morse Sound</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>Designed with high-contrast accessibility targets for blind & non-verbal users.</p>
+        </footer>
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>
