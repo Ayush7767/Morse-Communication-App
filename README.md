@@ -38,31 +38,6 @@ The project also includes an interactive **Morse Code learning tutorial** for le
 # 🧩 Architecture
 
 ```text
-                  User
-                   │
-                   ▼
-          Morse Communication UI
-                   │
-          ┌────────┴─────────┐
-          │                  │
-          ▼                  ▼
-     Dot / Dash /        Text Input
-       Space Input           │
-          │                  │
-          ▼                  ▼
-       Morse Code      Text → Morse
-          │
-          ▼
-    Morse Processing
-          │
-          ▼
-     Morse → Text
-          │
-          ▼
-      Speak / Audio
-          │
-          ▼
-        User
 
                   User
                    │
