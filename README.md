@@ -23,7 +23,6 @@ The project also includes an interactive **Morse Code learning tutorial** for le
 - ⬜ **Space Button** for separating Morse characters
 - 🔊 **Speak Button** for text-to-speech output
 - 🔄 Morse Code → English text conversion
-- 🔄 English text → Morse Code conversion
 - 📚 Interactive Morse Code tutorial
 - 🔤 Learn Morse Code for A–Z
 - ▶️ Start/Stop tutorial controls
@@ -129,28 +128,9 @@ Output:
 ```text
 HELLO
 ```
-
 ---
 
-## 3️⃣ Text to Morse
-
-The application can also convert normal English text into Morse code.
-
-Example:
-
-```text
-HELLO
-```
-
-Output:
-
-```text
-.... . .-.. .-.. ---
-```
-
----
-
-## 4️⃣ Speech Output
+## 3️⃣ Speech Output
 
 The application provides a **Speak** function that converts the generated text into speech.
 
@@ -242,35 +222,7 @@ cd Morse-Communication-App
 
 ---
 
-## 2️⃣ Create Virtual Environment
-
-### Windows
-
-```bash
-python -m venv venv
-```
-
-Activate it:
-
-```bash
-venv\Scripts\activate
-```
-
-### Linux / macOS
-
-```bash
-python3 -m venv venv
-```
-
-Activate it:
-
-```bash
-source venv/bin/activate
-```
-
----
-
-## 3️⃣ Install Dependencies
+## 2️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -286,71 +238,9 @@ Start the Flask application:
 python app.py
 ```
 
-The application will be available at:
-
-```text
-http://127.0.0.1:5000
-```
-
-Open the URL in your web browser.
-
----
-
-# 🧪 Testing
-
-The project includes a test file:
-
-```text
-test_app.py
-```
-
-Run the tests using:
-
-```bash
-python -m unittest test_app.py
-```
-
----
-
 # ☁️ Deployment
 
 The application is deployed using **Render**.
-
-## Render Configuration
-
-### Build Command
-
-```bash
-pip install -r requirements.txt
-```
-
-### Start Command
-
-```bash
-gunicorn app:app
-```
-
-### Deployment Flow
-
-```text
-GitHub Repository
-       │
-       ▼
-     Render
-       │
-       ▼
-Install Dependencies
-       │
-       ▼
-     Gunicorn
-       │
-       ▼
-   Flask Server
-       │
-       ▼
-   Live Website
-```
-
 ---
 
 # 🔧 Requirements
