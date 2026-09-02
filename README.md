@@ -1,8 +1,3 @@
-Absolutely. For your **Morse Communication web application**, the README should describe what the app actually does rather than pretending it's a large backend pipeline.
-
-Here is a polished `README.md` you can directly copy into your GitHub repository:
-
-````markdown
 # 🆘 Morse Communication Web Application
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
@@ -43,6 +38,32 @@ The project also includes an interactive **Morse Code learning tutorial** for le
 # 🧩 Architecture
 
 ```text
+                  User
+                   │
+                   ▼
+          Morse Communication UI
+                   │
+          ┌────────┴─────────┐
+          │                  │
+          ▼                  ▼
+     Dot / Dash /        Text Input
+       Space Input           │
+          │                  │
+          ▼                  ▼
+       Morse Code      Text → Morse
+          │
+          ▼
+    Morse Processing
+          │
+          ▼
+     Morse → Text
+          │
+          ▼
+      Speak / Audio
+          │
+          ▼
+        User
+
                   User
                    │
                    ▼
