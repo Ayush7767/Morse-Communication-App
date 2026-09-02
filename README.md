@@ -371,13 +371,3 @@ If you find this project useful:
 
 ```
 
-### One correction I'd make before you publish it
-
-Don't claim things like **"designed specifically for blind and non-speaking people"** unless your app has actually been tested for accessibility with those users. That's a stronger claim than your current implementation supports.
-
-A safer and more credible description is:
-
-> **"A Morse Code communication web application exploring accessible communication through simple button-based input, audio feedback, and text-to-speech."**
-
-That sounds professional **without overselling what the current version can actually do.**
-```
