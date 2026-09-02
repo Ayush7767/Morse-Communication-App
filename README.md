@@ -238,31 +238,6 @@ Start the Flask application:
 python app.py
 ```
 
-# ☁️ Deployment
-
-The application is deployed using **Render**.
----
-
-# 🔧 Requirements
-
-The project uses the following Python packages:
-
-```text
-Flask
-Flask-CORS
-gTTS
-pyttsx3
-Gunicorn
-```
-
-See:
-
-```text
-requirements.txt
-```
-
-for the complete dependency configuration.
-
 ---
 
 # 🧠 Technologies Used
